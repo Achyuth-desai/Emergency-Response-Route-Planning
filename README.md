@@ -1,18 +1,40 @@
-## Getting Started
+# Emergency Response Route Planning
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This project currently contains only the initial Java structure for an emergency-response shortest-route planner. It does not yet load route data, construct a graph, calculate routes, or provide command-line behavior.
 
-## Folder Structure
+## Package structure
 
-The workspace contains two folders by default, where:
+```text
+src/
+└── com/emergencyroute/
+    ├── App.java
+    ├── model/
+    │   ├── Node.java
+    │   ├── Route.java
+    │   └── Graph.java
+    ├── algorithm/
+    │   ├── ShortestPathAlgorithm.java
+    │   ├── DijkstraShortestPath.java
+    │   ├── WeightProvider.java
+    │   └── PathResult.java
+    └── service/
+        └── RoutePlanner.java
+```
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Responsibilities
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- `App` is the minimal application entry point.
+- `model` contains route-network domain types. `Node` and `Route` are immutable; `Graph` is the future boundary for graph access without exposing its eventual storage representation.
+- `algorithm` contains shortest-path contracts. `DijkstraShortestPath` is intentionally unimplemented, and `WeightProvider` keeps route-cost policy independent from the routing algorithm.
+- `service` contains the future application boundary that will coordinate routing requests.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Current model fields
 
-## Dependency Management
+- `Node`: `nodeId`, `latitude`, `longitude`
+- `Route`: `roadId`, `fromNode`, `toNode`, `distanceKm`, `highwayType`, `speedKmph`, `oneWay`, `active`
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Node and road identifiers are direct `String` fields. New domain attributes belong directly on `Node` or `Route`; this project does not use ID wrapper types or generic attribute sets.
+
+`oneWay` and `active` are retained as route data. Their legal-traversal enforcement will be designed with graph construction and Dijkstra implementation later.
+
+`PathResult` is currently an empty placeholder for a future computed path and its relevant cost information.
