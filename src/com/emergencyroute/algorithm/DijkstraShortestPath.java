@@ -60,16 +60,18 @@ public class DijkstraShortestPath implements ShortestPathAlgorithm {
 
             // For each neighbor of the current node, we calculate the cost to reach it and update if it's lower than the previously recorded cost.
             for(Route route : graph.getRoutesFrom(currentNodeId)) {
-                String neighborNodeId = route.getToNode();
-                double routeCost = weightProvider.calculateWeight(route);
+                if(route.isActive()) {
+                    String neighborNodeId = route.getToNode();
+                    double routeCost = weightProvider.calculateWeight(route);
 
-                double newCost = currentCost + routeCost;
+                    double newCost = currentCost + routeCost;
 
-                // If the new cost is lower than the previously recorded cost, we update the cost and add the neighbor to the priority queue.
-                if (newCost < costs.get(neighborNodeId)) {
-                    costs.put(neighborNodeId, newCost);
-                    previousRoutes.put(neighborNodeId, route);
-                    priorityQueue.add(new NodeCost(neighborNodeId, newCost));
+                    // If the new cost is lower than the previously recorded cost, we update the cost and add the neighbor to the priority queue.
+                    if (newCost < costs.get(neighborNodeId)) {
+                        costs.put(neighborNodeId, newCost);
+                        previousRoutes.put(neighborNodeId, route);
+                        priorityQueue.add(new NodeCost(neighborNodeId, newCost));
+                    }
                 }
             }
         }

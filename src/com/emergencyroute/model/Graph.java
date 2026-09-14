@@ -63,4 +63,8 @@ public class Graph {
     public List<Route> getRoutesFrom(String node) {
         return adjacencyList.getOrDefault(node, Collections.emptyList());
     }
+
+    public Node getNodeById(String nodeId) {
+        return nodes.get(nodeId);
+    }
 }
