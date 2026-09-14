@@ -26,8 +26,8 @@ public class RoutePlanner {
         if (sourceNodeId.equals(destinationNodeId)) {
             return new PathResult(
                     true,
-                    List.of(graph.getNodeById(sourceNodeId)),
-                    List.of(),
+                    List.<Node>of(graph.getNodeById(sourceNodeId)),
+                    List.<Route>of(),
                     0.0,
                     0.0);
         }
