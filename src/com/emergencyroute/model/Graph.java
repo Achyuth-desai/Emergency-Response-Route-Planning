@@ -1,6 +1,7 @@
 package com.emergencyroute.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,5 +50,17 @@ public class Graph {
                     .add(reverseRoute);
             }
         }
+    }
+
+    public Map<String, Node> getNodes() {
+        return nodes;
+    }
+
+    public Map<String, List<Route>> getAdjacencyList() {
+        return adjacencyList;
+    }
+
+    public List<Route> getRoutesFrom(String node) {
+        return adjacencyList.getOrDefault(node, Collections.emptyList());
     }
 }
