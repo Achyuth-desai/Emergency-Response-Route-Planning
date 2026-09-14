@@ -37,6 +37,12 @@ public class App {
         // Find the shortest path
         PathResult result = routePlanner.findShortestPath(sourceNodeId, destinationNodeId);
 
+        // Check if the destination is reachable
+        if (!result.isReachable()) {
+            System.out.println("Destination " + destinationNodeId + " is not reachable from source "+ sourceNodeId);
+            return;
+        }
+
         // Output
         RoutePrinter routePrinter = new RoutePrinter();
         routePrinter.printPathResult(result);
