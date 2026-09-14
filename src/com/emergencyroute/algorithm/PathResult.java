@@ -27,4 +27,24 @@ public class PathResult {
 		this.totalDistance = totalDistance;
 		this.totalTime = totalTime;
 	}
+
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	public List<Route> getRoutes() {
+		return routes;
+	}
+
+	public boolean isReachable() {
+		return reachable;
+	}
+
+	public double getTotalDistance() {
+		return totalDistance;
+	}
+
+	public double getTotalTime() {
+		return totalTime;
+	}
 }
