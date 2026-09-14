@@ -38,8 +38,8 @@ public class App {
         RoutePlanner routePlanner = new RoutePlanner(graph, algorithm);
 
         // Example request
-        String sourceNodeId = "N01";
-        String destinationNodeId = "N04";
+        String sourceNodeId = "N04";
+        String destinationNodeId = "N03";
 
         // Find the shortest path
         PathResult result = routePlanner.findShortestPath(sourceNodeId, destinationNodeId);
