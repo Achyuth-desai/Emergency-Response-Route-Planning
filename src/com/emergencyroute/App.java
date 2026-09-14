@@ -12,6 +12,7 @@ import com.emergencyroute.io.RoutePrinter;
 import com.emergencyroute.model.Graph;
 import com.emergencyroute.model.Node;
 import com.emergencyroute.model.Route;
+import com.emergencyroute.validation.DataValidator;
 import com.emergencyroute.service.RoutePlanner;
 
 /** Application entry point. */
@@ -21,6 +22,12 @@ public class App {
         // Load Data
         List<Node> nodes = SampleData.getNodes();
         List<Route> routes = SampleData.getRoutes();
+
+        // Validate the Data
+        DataValidator validator = new DataValidator();
+
+        validator.validateNodes(nodes);
+        validator.validateRoutes(routes, nodes);
 
         // Build the Graph
         Graph graph = new Graph(nodes, routes);

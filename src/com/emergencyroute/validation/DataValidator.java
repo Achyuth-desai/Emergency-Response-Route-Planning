@@ -1,4 +1,4 @@
-package com.emergencyroute.service;
+package com.emergencyroute.validation;
 
 import com.emergencyroute.model.Node;
 import com.emergencyroute.model.Route;
