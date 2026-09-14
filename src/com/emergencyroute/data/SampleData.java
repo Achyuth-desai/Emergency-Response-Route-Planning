@@ -30,52 +30,30 @@ public class SampleData {
         List<Route> routes = new ArrayList<>();
 
         routes.add(new Route("R01", "N01", "N02", 0.20, "residential", 30, false, true));
-
         routes.add(new Route("R02", "N02", "N03", 0.25, "secondary", 40, false, true));
-
         routes.add(new Route("R03", "N03", "N04", 0.30, "primary", 50, true, true));
-
         routes.add(new Route("R04", "N04", "N05", 0.28, "primary", 50, false, true));
-
         routes.add(new Route("R05", "N05", "N06", 0.32, "secondary", 40, false, true));
-
         routes.add(new Route("R06", "N06", "N07", 0.30, "tertiary", 35, false, true));
-
         routes.add(new Route("R07", "N07", "N08", 0.35, "residential", 30, false, true));
-
         routes.add(new Route("R08", "N08", "N09", 0.28, "residential", 30, false, true));
-
         routes.add(new Route("R09", "N09", "N10", 0.30, "secondary", 40, false, true));
-
         routes.add(new Route("R10", "N10", "N01", 0.25, "primary", 50, false, true));
-
         routes.add(new Route("R11", "N02", "N08", 0.40, "residential", 20, false, true));
-
         routes.add(new Route("R12", "N03", "N06", 0.45, "primary", 50, false, true));
-
         routes.add(new Route("R13", "N05", "N11", 0.22, "secondary", 40, true, true));
-
         routes.add(new Route("R14", "N11", "N12", 0.40, "primary", 50, false, true));
-
         routes.add(new Route("R15", "N06", "N12", 0.55, "tertiary", 35, false, true));
-
         routes.add(new Route("R16", "N04", "N08", 0.60, "secondary", 40, false, true));
-
         routes.add(new Route("R17", "N01", "N03", 0.35, "residential", 15, false, true));
-
         routes.add(new Route("R18", "N07", "N11", 0.50, "primary", 50, false, true));
-
         routes.add(new Route("R19", "N02", "N05", 0.60, "residential", 20, false, true));
-
         routes.add(new Route("R20", "N03", "N02", 0.10, "residential", 20, false, true));
-
         routes.add(new Route("R21", "N09", "N12", 0.20, "residential", 20, false, true));
-
         routes.add(new Route("R22", "N10", "N11", 0.10, "secondary", 40, false, true));
-
         routes.add(new Route("R23", "N08", "N10", 0.30, "residential", 30, false, true));
-
         routes.add(new Route("R24", "N04", "N05", 0.28, "primary", 50, false, true));
+
         // routes.add(new Route("R01", "N01", "N02", 0.20, "residential", 30, false, true));
         // routes.add(new Route("R02", "N02", "N03", 0.25, "secondary", 40, false, true));
         // routes.add(new Route("R03", "N03", "N04", 0.30, "primary", 50, true, true));
