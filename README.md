@@ -1,6 +1,6 @@
 # Emergency Response Route Planning
 
-A command-line Java application that computes the fastest route between two points in a road network — built with emergency dispatch in mind, where routes need to skip blocked roads and optimize for travel *time*, not just distance.
+A command-line Java application that computes the fastest route between two points in a road network — built with emergency dispatch in mind, where routes need to skip blocked roads and optimize for travel *time*, not distance.
 
 It loads a road network (locations + road segments) from CSV files, validates the data, builds a graph, and runs Dijkstra's algorithm to answer a batch of "get from A to B" queries.
 
