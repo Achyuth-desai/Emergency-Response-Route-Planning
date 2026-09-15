@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-/** Placeholder for the future Dijkstra shortest-path implementation. */
 public class DijkstraShortestPath implements ShortestPathAlgorithm {
     // To store the cost of reaching each node, we can use a record to represent a
     // node and its associated cost.

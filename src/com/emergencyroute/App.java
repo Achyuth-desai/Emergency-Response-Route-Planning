@@ -19,7 +19,7 @@ import com.emergencyroute.service.RoutePlanner;
 public class App {
     public static void main(String[] args) throws java.io.IOException {
 
-        // Load Data
+        // Load Data into separate lists
         CsvData csvData = new CsvData("src/com/emergencyroute/data/nodes.csv", 
                                         "src/com/emergencyroute/data/roads_valid.csv",
                                         "src/com/emergencyroute/data/routing_queries.csv");
@@ -40,15 +40,17 @@ public class App {
         // Build the Graph
         Graph graph = new Graph(nodes, routes);
 
+        // Initialize the algorithm object and its weight provider
         WeightProvider weightProvider = new TravelTimeWeightProvider();
         ShortestPathAlgorithm algorithm = new DijkstraShortestPath(weightProvider);
 
         RoutePlanner routePlanner = new RoutePlanner(graph, algorithm);
 
+        // Iterate through each query provided
         for (List<String> query : routingQueries) {
             String sourceNodeId = query.get(1);
             String destinationNodeId = query.get(2);
-
+            //Print the query details
             System.out.println("\nQuery " + query.get(0) + " | Source: " + sourceNodeId
                     + " | Destination: " + destinationNodeId);
 
@@ -68,7 +70,7 @@ public class App {
                 continue;
             }
 
-            // Output
+            // Print the output
             RoutePrinter routePrinter = new RoutePrinter();
 
             routePrinter.printPathResult(result);

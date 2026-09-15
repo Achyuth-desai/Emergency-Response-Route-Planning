@@ -6,6 +6,7 @@ import java.util.List;
 import com.emergencyroute.model.Node;
 import com.emergencyroute.model.Route;
 
+/* Class created to hard-code sample data for testing purposes. Can be ignored later. */
 public class SampleData {
     public static List<Node> getNodes() {
         List<Node> nodes = new ArrayList<>();

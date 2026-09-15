@@ -9,7 +9,6 @@ import com.emergencyroute.model.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Future application boundary for coordinating routing requests. */
 public class RoutePlanner {
     private final Graph graph;
     private final ShortestPathAlgorithm algorithm;
@@ -20,9 +19,11 @@ public class RoutePlanner {
     }
 
     public PathResult findShortestPath(String sourceNodeId, String destinationNodeId) {
+        // Validate the provided source and destination nodes
         validateNodeExists(sourceNodeId);
         validateNodeExists(destinationNodeId);
 
+        // Check if source and destination IDs are the same
         if (sourceNodeId.equals(destinationNodeId)) {
             return new PathResult(
                     true,
@@ -35,10 +36,12 @@ public class RoutePlanner {
         // Use the provided algorithm to find the shortest path from source to destination.
         List<Route> routeToDestination = algorithm.findPath(graph, sourceNodeId, destinationNodeId);
 
+        // If the list is empty, it means that the destination is not reachable.
         if (routeToDestination.isEmpty()) {
             return new PathResult(false, List.of(), List.of(), 0.0, 0.0);
         }
-        // Find the nodes in the path and calculate total distance and time
+
+        // Find the nodes along the path and calculate total distance and time from source to destination
         List<Node> nodesInPath = new ArrayList<>();
         double totalDistance = 0.0;
         double totalTime = 0.0;
@@ -53,6 +56,7 @@ public class RoutePlanner {
         return new PathResult(true, nodesInPath, routeToDestination, totalDistance, totalTime);
     }
 
+    // Node validator method. Checks if the node provided is present in the graph.
     private void validateNodeExists(String nodeId) {
         if(graph.getNodeById(nodeId) == null) {
             throw new IllegalArgumentException("Node with ID " + nodeId + " does not exist in the graph.");
