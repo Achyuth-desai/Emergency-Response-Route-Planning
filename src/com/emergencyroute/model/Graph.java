@@ -6,12 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Future boundary for route-network access.
- *
- * <p>Its internal representation and graph-query operations will be defined
- * when routing functionality is implemented.</p>
- */
+
 public class Graph {
 	private final Map<String, Node> nodes = new HashMap<>();
 	private final Map<String, List<Route>> adjacencyList = new HashMap<>();
@@ -33,7 +28,7 @@ public class Graph {
 
             // Reverse direction for two-way routes
             if (!route.isOneWay()) {
-
+                // Switch FromNode and ToNode to reverse the direction keeping rest of the attributes same
                 Route reverseRoute = new Route(
                     route.getRoadId(),
                     route.getToNode(),
@@ -45,6 +40,7 @@ public class Graph {
                     route.isActive()
                 );
 
+                // Add the route if no route is present in the adj list. If present, append.
                 adjacencyList
                     .computeIfAbsent(route.getToNode(), key -> new ArrayList<>())
                     .add(reverseRoute);

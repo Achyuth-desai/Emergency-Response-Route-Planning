@@ -5,9 +5,7 @@ import com.emergencyroute.model.Route;
 
 import java.util.List;
 
-/**
- * Future result of a shortest-path calculation, including path and cost data.
- */
+// Represents the result set of the shortest path between source and destination
 public class PathResult {
 	private final boolean reachable;
 	private final List<Node> nodes;
