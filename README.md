@@ -106,7 +106,7 @@ This will:
 3. Compute the fastest route for every query in `routing_queries.csv`.
 4. Print each result — path taken, sequence of locations, roads used, total distance (km), and total time (hours) — to the console.
 
-To try your own network, edit those three CSV files (or point `App.java` at different file paths) and re-run.
+> To try your own network, edit those three CSV files (or point `App.java` at different file paths) and re-run.
 
 ## Requirements
 
