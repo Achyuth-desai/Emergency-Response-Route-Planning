@@ -29,6 +29,7 @@ public class SampleData {
     public static List<Route> getRoutes() {
         List<Route> routes = new ArrayList<>();
 
+        // Valid dataset created for testing purposes
         routes.add(new Route("R01", "N01", "N02", 0.20, "residential", 30, false, true));
         routes.add(new Route("R02", "N02", "N03", 0.25, "secondary", 40, false, true));
         routes.add(new Route("R03", "N03", "N04", 0.30, "primary", 50, true, true));

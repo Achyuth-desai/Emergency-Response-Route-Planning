@@ -14,14 +14,24 @@ import com.emergencyroute.model.Route;
 public class CsvData {
     private final List<Node> nodes;
     private final List<Route> routes;
+    private final List<List<String>> routingQueries;
 
     public CsvData(Path nodesFile, Path routesFile) throws IOException {
+        this(nodesFile, routesFile, null);
+    }
+
+    public CsvData(Path nodesFile, Path routesFile, Path routingQueriesFile) throws IOException {
         nodes = loadNodes(nodesFile);
         routes = loadRoutes(routesFile);
+        routingQueries = routingQueriesFile == null ? new ArrayList<>() : loadRoutingQueries(routingQueriesFile);
     }
 
     public CsvData(String nodesFile, String routesFile) throws IOException {
         this(Path.of(nodesFile), Path.of(routesFile));
+    }
+
+    public CsvData(String nodesFile, String routesFile, String routingQueriesFile) throws IOException {
+        this(Path.of(nodesFile), Path.of(routesFile), Path.of(routingQueriesFile));
     }
 
     public List<Node> getNodes() {
@@ -30,6 +40,10 @@ public class CsvData {
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public List<List<String>> getRoutingQueries() {
+        return routingQueries;
     }
 
     private List<Node> loadNodes(Path file) throws IOException {
@@ -53,6 +67,17 @@ public class CsvData {
             result.add(new Route(row.get(0), row.get(1), row.get(2), parseDouble(row.get(3), "distanceKm"),
                     row.get(4), parseDouble(row.get(5), "speedKmph"), parseBoolean(row.get(6)),
                     parseBoolean(row.get(7))));
+        });
+        return result;
+    }
+
+    private List<List<String>> loadRoutingQueries(Path file) throws IOException {
+        List<List<String>> result = new ArrayList<>();
+        readRows(file, row -> {
+            if (row.size() != 3) {
+                throw new IllegalArgumentException("Expected 3 columns in routing_queries.csv");
+            }
+            result.add(new ArrayList<>(row));
         });
         return result;
     }
@@ -111,7 +136,11 @@ public class CsvData {
     }
 
     private boolean isHeader(List<String> row) {
-        return !row.isEmpty() && (row.get(0).equalsIgnoreCase("nodeId") || row.get(0).equalsIgnoreCase("roadId"));
+        return !row.isEmpty() && (row.get(0).equalsIgnoreCase("nodeId")
+                || row.get(0).equalsIgnoreCase("node_id")
+                || row.get(0).equalsIgnoreCase("roadId")
+                || row.get(0).equalsIgnoreCase("road_id")
+                || row.get(0).equalsIgnoreCase("query_id"));
     }
 
     private double parseDouble(String value, String field) {
