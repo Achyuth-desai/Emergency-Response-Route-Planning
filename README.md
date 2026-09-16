@@ -87,8 +87,13 @@ javac -d out $(find src -name "*.java")
 dir /s /b src\*.java > sources.txt
 javac -d out @sources.txt
 ```
+**Windows (Powershell / Terminal):**
+```powershell
+(Get-ChildItem src -Recurse -Filter *.java -File).FullName | Set-Content sources.txt
+javac -d out '@sources.txt'
+```
 
-Both commands compile all `.java` files under `src/` into an `out/` directory, mirroring the package structure.
+Above commands compile all `.java` files under `src/` into an `out/` directory, mirroring the package structure.
 
 > If you're using VS Code with the Java Extension Pack, the included `.vscode/settings.json` is already configured (source path `src`, output path `bin`) - you can just open the folder and use the built-in Run/Debug on `App.java` instead of the commands above.
 
