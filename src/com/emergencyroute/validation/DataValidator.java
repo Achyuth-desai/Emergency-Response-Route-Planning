@@ -21,7 +21,7 @@ public class DataValidator {
             requireText(node.getNodeId(), "Node ID");
             if (!nodeIds.add(node.getNodeId())) { // Node value should be unique. No duplicate entries allowed
                 throw new IllegalArgumentException("Duplicate node ID: " + node.getNodeId());
-            }//Legal latitude and longitude values
+            } //Legal latitude and longitude values
             if (!Double.isFinite(node.getLatitude()) || node.getLatitude() < -90 || node.getLatitude() > 90) {
                 throw new IllegalArgumentException("Node latitude must be finite and between -90 and 90.");
             }
@@ -56,10 +56,7 @@ public class DataValidator {
             } // Routes must connect valid nodes
             if (!nodeIds.contains(route.getFromNode()) || !nodeIds.contains(route.getToNode())) {
                 throw new IllegalArgumentException("Route endpoints must reference existing nodes: " + route.getRoadId());
-            } // Routes cannot connect the same node as it can cause cycles
-            if (route.getFromNode().equals(route.getToNode())) {
-                throw new IllegalArgumentException("A route cannot connect a node to itself: " + route.getRoadId());
-            }
+            } // Distance and speed must be finite and greater than zero 
             if (!Double.isFinite(route.getDistanceKm()) || route.getDistanceKm() <= 0) {
                 throw new IllegalArgumentException("Route distance must be finite and greater than zero: " + route.getRoadId());
             }
