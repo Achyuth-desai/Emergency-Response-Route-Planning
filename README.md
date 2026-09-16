@@ -7,7 +7,7 @@ It loads a road network (locations + road segments) from CSV files, validates th
 ## Features
 
 - **CSV-driven road network** - locations/nodes (`nodes.csv`), road segments (`roads_valid.csv`), and a batch of routing requests (`routing_queries.csv`) are all loaded from disk; no recompilation needed to test a new network.
-- **Data validation before routing** - every node and route is checked (duplicate IDs, non-existent endpoints, self-loops, non-positive distance/speed, null checks) so bad data fails fast with a clear message instead of producing a wrong route.
+- **Data validation before routing** - every node and route is checked (duplicate IDs, non-existent endpoints, non-positive distance/speed, null checks) so bad data fails fast with a clear message instead of producing a wrong route.
 - **Directed graph with automatic two-way expansion** - a road is stored once in the CSV; if it isn't marked one-way, the graph adds the reverse edge automatically.
 - **Blocked-road awareness** - each route has an `active` flag. Inactive (e.g. closed/blocked) roads are skipped when searching for a path, without needing to delete them from the dataset.
 - **Time-optimized shortest path** - uses Dijkstra's algorithm, weighting each road by `distance ÷ speed` (i.e. travel time), so the "shortest" route is the fastest one, not necessarily the shortest in km.
@@ -27,11 +27,23 @@ It loads a road network (locations + road segments) from CSV files, validates th
 - **Strategy pattern for the algorithm and the cost function** (`ShortestPathAlgorithm`, `WeightProvider` interfaces) - the routing algorithm (Dijkstra today) and how an edge's "cost" is computed (travel time today) are both swappable without changing `Graph` or `RoutePlanner`. Someone could add an A* implementation or a distance-only/road-type-aware weight provider later without touching the rest of the codebase.
 - **Time as the default cost metric** - distance alone doesn't reflect real travel time on different road types/speeds, and for emergency response, minutes matter more than kilometers.
 - **One-way vs. two-way handling** - Directed edges are identified at graph-build time. The route is added to both nodes/locations in their adjacency lists for bi-directional routes.
-- **`active` flag instead of deleting roads** - models a road being temporarily closed as data, so a network can be re-routed around a blockage just by flipping a flag, no dataset surgery required.
+- **`active` flag check at route finding** - roads marked as `inactive` are considered while building the graph. They are checked for and ignored/avoided while finding the shortest path from source to destination.
 - **Validation is a separate step from parsing and graph-building** - `CsvData` only parses, `DataValidator` only validates, `Graph` only assembles. Bad input produces a clear, specific error before Dijkstra ever runs, instead of a confusing downstream failure.
 - **Immutable domain objects** - `Node` and `Route` have no setters, so once the network is loaded it can't be mutated accidentally mid-computation.
 - **No external dependencies** - a small hand-rolled CSV parser is used instead of pulling in a library, so the whole project builds with nothing but a JDK and `javac`.
 - **Per-query error isolation** - `App` wraps each query in its own try/catch so one malformed or unreachable query doesn't abort the rest of the batch.
+
+## Assumptions
+
+1. **Fastest route is not the shortest route in terms of distance** - it is the route that takes the least amount of time to reach the destination.
+
+2. **Invalid input** - the following cases are considered invalid input, and the application throws an exception without proceeding with graph construction:
+   - Nodes with invalid latitude or longitude values.
+   - Routes that start or end at non-existing nodes.
+   - Routes with distance or speed values less than or equal to `0`.
+   - Routing queries that reference non-existing nodes. An exception is thrown for the particular query.
+
+3. **Inactive routes** - routes marked as `inactive` should not be considered when finding the shortest path. However, the graph should still be built including these routes, since they exist in the dataset.
 
 ## Project Structure
 
