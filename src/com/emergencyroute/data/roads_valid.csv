@@ -23,4 +23,4 @@ R21,N09,N12,0.20,residential,20,false,true
 R22,N10,N11,0.10,secondary,40,false,true
 R23,N08,N10,0.30,residential,30,false,true
 R24,N04,N05,0.28,primary,50,false,true
-R25,N13,N13,0.01,primary,50,false,true
+R25,N12,N12,0.01,primary,50,false,true

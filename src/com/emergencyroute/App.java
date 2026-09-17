@@ -21,7 +21,7 @@ public class App {
 
         // Load Data into separate lists
         CsvData csvData = new CsvData("src/com/emergencyroute/data/nodes.csv", 
-                                        "src/com/emergencyroute/data/roads_valid.csv",
+                                        "src/com/emergencyroute/data/roads.csv",
                                         "src/com/emergencyroute/data/routing_queries.csv");
         List<Node> nodes = csvData.getNodes();
         List<Route> routes = csvData.getRoutes();
