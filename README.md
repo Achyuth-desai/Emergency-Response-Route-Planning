@@ -71,8 +71,8 @@ Emergency Response Route Planning/
     │   ├── CsvData.java                   # Loads/parses nodes, roads, and routing queries from CSV
     │   ├── SampleData.java                # Hardcoded network used for quick manual testing (see App.java)
     │   ├── nodes.csv                      # Locations (id, latitude, longitude)
-    │   ├── roads.csv                      # Roads (id, from, to, distance, type, speed, one-way, active)
-    │   ├── roads_valid.csv                # Corrected version of roads.csv (for testing validation) - this is what App.java actually loads
+    │   ├── roads.csv                      # Roads (id, from, to, distance, type, speed, one-way, active) - this is what App.java actually loads
+    │   ├── roads_valid.csv                # Corrected version of roads.csv (for testing validation) - update App.java to point to this for testing routing
     │   └── routing_queries.csv            # Sample batch of source/destination queries
     │
     ├── validation/
