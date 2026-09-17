@@ -118,7 +118,7 @@ java -cp out com.emergencyroute.App
 ```
 
 This will:
-1. Load `nodes.csv`, `roads_valid.csv`, and `routing_queries.csv`.
+1. Load `nodes.csv`, `roads.csv`, and `routing_queries.csv`.
 2. Validate the network.
 3. Compute the fastest route for every query in `routing_queries.csv`.
 4. Print each result - path taken, sequence of locations, roads used, total distance (km), and total time (hours) - to the console.
